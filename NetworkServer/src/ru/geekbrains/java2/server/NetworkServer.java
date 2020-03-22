@@ -56,6 +56,14 @@ public class NetworkServer {
         }
     }
 
+    public synchronized void directMessage(String nickName, String message) throws IOException {
+        for (ClientHandler client : clients) {
+            if (nickName.equalsIgnoreCase(client.getNickname())) {
+                client.sendMessage(message);
+            }
+        }
+    }
+
     public synchronized void subscribe(ClientHandler clientHandler) {
         clients.add(clientHandler);
     }
